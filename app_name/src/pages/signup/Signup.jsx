@@ -37,8 +37,7 @@ function Signup() {
       <div className="error">{errorMessages.message}</div>
     );
 
-  // JSX code for signup form
-  const Signup = () => {
+
     return <div className="app">
         <form>
             <FormInput placeholder="Username"/>
@@ -47,7 +46,6 @@ function Signup() {
             <FormInput placeholder="Something"/>
         </form>
     </div>
-  }
 }
 
 export default Signup;
