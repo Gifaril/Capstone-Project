@@ -4,6 +4,7 @@ import { useNavigate  } from "react-router-dom";
 
 import "./signup.scss";
 import FormInput from "../../components/form/FormInput";
+import { unstable_composeClasses } from "@mui/material";
 
 function Signup() {
   // React States
@@ -37,15 +38,20 @@ function Signup() {
       <div className="error">{errorMessages.message}</div>
     );
 
-
-    return <div className="app">
-        <form>
-            <FormInput placeholder="Username"/>
-            <FormInput placeholder="Email"/>
-            <FormInput placeholder="Fullname"/>
-            <FormInput placeholder="Something"/>
-        </form>
-    </div>
+    const Signup = () => {
+      const [username,setusername] = useState("")
+      
+      console.log(username)
+      return <div className="app">
+      <form>
+          <FormInput placeholder="Username" setusername/>
+          <FormInput placeholder="Email"/>
+          <FormInput placeholder="Fullname"/>
+          <FormInput placeholder="Something"/>
+      </form>
+  </div>
+    }
+   
 }
 
 export default Signup;
