@@ -1,8 +1,11 @@
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
+import Signup from "./pages/signup/Signup";
 import Students from "./pages/students/Students";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
+
+
 import {
   BrowserRouter,
   Routes,
@@ -22,6 +25,7 @@ function App() {
     <div className="App">
      <BrowserRouter>
       <Routes>
+      <Route path="signup" element={<Signup/>} />
         <Route path="login" element={<Login/>} />
         <Route element={<ProptectedRoute/>} path="/">
           <Route index element={<Home/>} />
