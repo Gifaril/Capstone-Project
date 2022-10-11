@@ -7,16 +7,24 @@ import {
   BrowserRouter,
   Routes,
   Route,
+  Outlet,
+  Navigate
 } from "react-router-dom";
+
+const ProptectedRoute = ()=> {
+  const value = window.localStorage.getItem('token');
+  return value ? <Outlet/> : <Navigate to ='/login'/>
+
+}
 
 function App() {
   return (
     <div className="App">
      <BrowserRouter>
       <Routes>
-        <Route path="/">
+        <Route path="login" element={<Login/>} />
+        <Route element={<ProptectedRoute/>} path="/">
           <Route index element={<Home/>} />
-          <Route path="login" element={<Login/>} />
           <Route path="users">
             <Route index element={<Students/>} />
             <Route path=":userId" element={<Single/>} />

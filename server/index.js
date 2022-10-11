@@ -3,6 +3,8 @@ var validator = require("email-validator");
 const db = require('./db')
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
+
 
 function generateAccessToken(id) {
     return jwt.sign(id, 'SECRET123', { expiresIn: '1800s' });
@@ -28,7 +30,9 @@ function authenticateToken(req, res, next) {
 
 const server = async ()=> {
     const app = express()
-
+    app.use(cors({
+        origin: '*'
+    }));
     const port = 8080
 
     app.use(express.json())

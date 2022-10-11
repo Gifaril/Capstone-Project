@@ -5,7 +5,17 @@ import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 import SchoolIcon from '@mui/icons-material/School';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate  } from "react-router-dom";
+
+
+
 const Sidebar = () => {
+    const navigate = useNavigate()
+
+    const handleLogout = ()=> {
+        window.localStorage.removeItem("token")
+        navigate(`/login`)
+    }
     return (
         <div className="sidebar">
             <div className="top">
@@ -37,8 +47,8 @@ const Sidebar = () => {
                         <span>Students</span>
                     </li>
                     <p className="title">USER</p>
-                    <li>
-                        < LogoutIcon className="icon"/>
+                    <li onClick={handleLogout}>
+                        < LogoutIcon className="icon" />
                         <span>Logout</span>
                     </li>
                 </ul>
