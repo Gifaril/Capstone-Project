@@ -1,57 +1,91 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate  } from "react-router-dom";
-
+import { useState } from "react";
 import "./signup.scss";
-import FormInput from "../../components/form/FormInput";
-import { unstable_composeClasses } from "@mui/material";
+import FormInput from "./components/form/FormInput";
 
-function Signup() {
-  // React States
-  const [errorMessages, setErrorMessages] = useState({});
-  const navigate = useNavigate()
+const Signup = () => {
+  const [values, setValues] = useState({
+    username: "",
+    email: "",
+    birthday: "",
+    password: "",
+    confirmPassword: "",
+  });
 
+  const inputs = [
+    {
+      id: 1,
+      name: "username",
+      type: "text",
+      placeholder: "Username",
+      errorMessage:
+        "Username should be 3-16 characters and shouldn't include any special character!",
+      label: "Username",
+      pattern: "^[A-Za-z0-9]{3,16}$",
+      required: true,
+    },
+    {
+      id: 2,
+      name: "email",
+      type: "email",
+      placeholder: "Email",
+      errorMessage: "It should be a valid email address!",
+      label: "Email",
+      required: true,
+    },
+    {
+      id: 3,
+      name: "birthday",
+      type: "date",
+      placeholder: "Birthday",
+      label: "Birthday",
+    },
+    {
+      id: 4,
+      name: "password",
+      type: "password",
+      placeholder: "Password",
+      errorMessage:
+        "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
+      label: "Password",
+      pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+      required: true,
+    },
+    {
+      id: 5,
+      name: "confirmPassword",
+      type: "password",
+      placeholder: "Confirm Password",
+      errorMessage: "Passwords don't match!",
+      label: "Confirm Password",
+      pattern: values.password,
+      required: true,
+    },
+  ];
 
-  const handleSubmit = async (event) => {
-    //Prevent page reload
-    event.preventDefault();
-
-    var { uname, pass } = document.forms[0];
-    console.log(uname.value, pass)
-    // Find user login info
-    try {
-        const response = await axios.post('http://localhost:8080/api/admin/login', {
-        password: pass.value,
-        email: uname.value
-        }); 
-        console.log(response)
-        window.localStorage.setItem('token', response.data.token)
-        navigate(`/`)
-    } catch (error) {
-        setErrorMessages({ name: "pass", message: error.response.data });
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
 
-  // Generate JSX code for error message
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error">{errorMessages.message}</div>
-    );
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
 
-    const Signup = () => {
-      const [username,setusername] = useState("")
-      
-      console.log(username)
-      return <div className="app">
-      <form>
-          <FormInput placeholder="Username" setusername/>
-          <FormInput placeholder="Email"/>
-          <FormInput placeholder="Fullname"/>
-          <FormInput placeholder="Something"/>
+  return (
+    <div className="app">
+      <form onSubmit={handleSubmit}>
+        <h1>Register</h1>
+        {inputs.map((input) => (
+          <FormInput
+            key={input.id}
+            {...input}
+            value={values[input.name]}
+            onChange={onChange}
+          />
+        ))}
+        <button>Submit</button>
       </form>
-  </div>
-    }
-   
-}
+    </div>
+  );
+};
 
 export default Signup;
