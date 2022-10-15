@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./signup.scss";
-import FormInput from "./components/form/FormInput";
+import FormInput from "../../components/form/FormInput";
 
 const Signup = () => {
   const [values, setValues] = useState({

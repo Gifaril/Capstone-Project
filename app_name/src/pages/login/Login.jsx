@@ -60,7 +60,7 @@ function Login() {
   return (
     <div className="app">
       <div className="login-form">
-        <div className="title">Sign In</div>
+        <div className="title">SIGN IN</div>
         {renderForm}
       </div>
     </div>

@@ -7,7 +7,9 @@
     gap: 20px;
     height: 100vh;
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-    background-color: #f8f9fd;
+    background: linear-gradient(
+        rgba(255, 255, 255, 0.7),
+        rgba(255, 255, 255, 0.3),);
   }
   
   input[type="text"],
@@ -17,19 +19,23 @@
   }
   
   input[type="submit"] {
-    margin-top: 20px;
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border: none;
+    background-color: rebeccapurple;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 18px;
     cursor: pointer;
-    font-size: 15px;
-    background: #01d28e;
-    border: 1px solid #01d28e;
-    color: #fff;
-    padding: 10px 20px;
-    width: 10vw;
+    margin-top: 15px;
+    margin-bottom: 30px;
 
   }
   
   input[type="submit"]:hover {
-    background: #6cf0c2;
+    background: purple;
   }
   
   .button-container {
@@ -38,11 +44,9 @@
   }
   
   .login-form {
-    background-color: white;
-    padding: 2rem;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: 20vw;
-    height: 50vh;
+      background-color: white;
+      padding: 0px 60px;
+      border-radius: 10px;
   }
   
   .list-container {
@@ -56,8 +60,10 @@
   
   .title {
     font-size: 3em;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-weight: bold;
+    text-align: center;
+    color: rgb(77, 1, 77);
   }
   
   .input-container {
@@ -68,6 +74,6 @@
   }
 
   label {
-    font-size: 2.5em;
+    font-size: 5em;
     margin-bottom: 10px;
   }
