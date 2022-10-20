@@ -19,7 +19,8 @@ const Sidebar = () => {
     return (
         <div className="sidebar">
             <div className="top">
-                <span className="logo">KLTCstudentportal</span>
+                <span className="logo">
+                    KLTCstudentPortal</span>
             </div>
             <hr/>
             <div className="center">
