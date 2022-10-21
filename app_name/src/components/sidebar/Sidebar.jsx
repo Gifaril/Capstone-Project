@@ -1,9 +1,9 @@
 import "./sidebar.scss"
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
-import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
-import SchoolIcon from '@mui/icons-material/School';
+import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
+import ModelTrainingIcon from '@mui/icons-material/ModelTraining';
+import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate  } from "react-router-dom";
 
@@ -19,32 +19,32 @@ const Sidebar = () => {
     return (
         <div className="sidebar">
             <div className="top">
-                <span className="logo">KLTCadmin</span>
+                <span className="logo">
+                    KLTCstudentPortal</span>
             </div>
             <hr/>
             <div className="center">
                 <ul>
                     <p className="title">Main</p>
                     <li>
-                        <DashboardIcon className="icon"/>
+                        <DashboardOutlinedIcon className="icon"/>
                         <span>Dashboard</span>
                     </li>
-                    <p className="title">LISTS</p>
                     <li>
                         <PersonOutlineOutlinedIcon className="icon"/>
-                        <span>Users</span>
+                        <span>Profile</span>
                     </li>
                     <li>
-                        < GroupOutlinedIcon className="icon"/>
-                        <span>Trainers</span>
+                        <SchoolOutlinedIcon className="icon"/>
+                        <span>Education</span>
                     </li>
                     <li>
-                        <DocumentScannerIcon className="icon"/>
-                        <span>Batches</span>
+                        <WorkOutlineIcon className="icon"/>
+                        <span>Experiences</span>
                     </li>
                     <li>
-                        <SchoolIcon className="icon"/>
-                        <span>Students</span>
+                        <ModelTrainingIcon className="icon"/>
+                        <span>Trainings and Seminars</span>
                     </li>
                     <p className="title">USER</p>
                     <li onClick={handleLogout}>

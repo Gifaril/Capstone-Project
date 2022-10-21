@@ -1,9 +1,9 @@
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
-import Students from "./pages/students/Students";
-import Single from "./pages/single/Single";
-import New from "./pages/new/New";
+import Trainings from "./pages/trainings&seminars/Trainings";
+import Experiences from "./pages/experiences/Experiences";
+import Education from "./pages/education/Education";
 
 
 import {
@@ -27,18 +27,12 @@ function App() {
       <Routes>
       <Route path="signup" element={<Signup/>} />
         <Route path="login" element={<Login/>} />
-        <Route element={<ProptectedRoute/>} path="/">
+        <Route path="/">
           <Route index element={<Home/>} />
-          <Route path="users">
-            <Route index element={<Students/>} />
-            <Route path=":userId" element={<Single/>} />
-            <Route path="new" element={<New/>} />
-          </Route>
-          <Route path="batch">
-            <Route index element={<Students/>} />
-            <Route path=":batchId" element={<Single/>} />
-            <Route path="new" element={<New/>} />
-          </Route>
+          <Route path="education" element={<Education/>}/>
+          <Route path="experiences" element={<Experiences/>}/>
+          <Route path="education" element={<Education/>}/>
+          <Route path="trainings" element={<Trainings/>}/>
         </Route>
       </Routes>
     </BrowserRouter>,
