@@ -110,6 +110,87 @@ const server = async ()=> {
         }
     })
 
+    app.get('/api/batch', authenticateToken, async (req, res)=> {
+        console.log(req)
+        const query = {
+            text: `
+            SELECT * FROM batch
+            `,
+          }
+        try {
+            const response = await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: response.rows
+            })  
+        } catch (error) {
+            console.error(error)
+        }
+    })
+
+    app.post('/api/batch', authenticateToken, async (req, res)=> {
+        const body = req.body
+        const query = {
+            text: `
+            INSERT INTO batch(batch_name, batch_date) VALUES($1, $2)
+            `,
+            values: [body.batch_name, body.batch_date],
+          }
+        try {
+            await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: body
+            })    
+        } catch (error) {
+            console.error(error)
+            res.status(500).send('Something went wrong!')
+        }
+    })
+
+    app.get('/api/students', authenticateToken, async (req, res)=> {
+        console.log(req)
+        const query = {
+            text: `
+            SELECT * FROM students
+            `,
+          }
+        try {
+            const response = await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: response.rows
+            })  
+        } catch (error) {
+            console.error(error)
+        }
+    })
+
+    app.post('/api/students', authenticateToken, async (req, res)=> {
+        const body = req.body
+        if (!validator.validate(body.email)){
+            res.status(500).send('Email is not valid')
+            return
+        }
+        const hashPassword = await argon2.hash(body.password)
+        const query = {
+            text: `
+            INSERT INTO students(first_name, last_name, password, email, age, birthdate, batch_id, created_on) VALUES($1, $2, $3, $4, $5, $6, $7, $8)
+            `,
+            values: [body.first_name, body.last_name, hashPassword, body.email, body.age, body.birthdate, body.batch_id, new Date()],
+          }
+        try {
+            await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: body
+            })    
+        } catch (error) {
+            console.error(error)
+            res.status(500).send('Something went wrong!')
+        }
+    })
+
     
     app.listen(port, ()=> {
         console.log('listening on port:', port)
