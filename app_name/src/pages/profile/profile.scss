@@ -11,13 +11,24 @@
     background-size: cover;
     background-position: center;
   }
+  .profileContainer{
+    flex: 6;
+  }
+  .profileCon{
+      min-height: 40vh;
+      display: flex;
+      font-size: 14px;
+      color:#555;
+      padding: 3rem;
+  }
   
   form{
       background-color: white;
       padding: 0px 60px;
       border-radius: 10px;
-      height: 90vh;
+      height: 75vh;
       padding-top: 20px;
+      margin-left: 9vw;
   }
   
   button{

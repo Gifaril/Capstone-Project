@@ -2,6 +2,7 @@ import "./profile.scss"
 import { useState } from "react";
 import ProfForm from '../../components/profForm/ProfForm';
 import Sidebar from "../../components/sidebar/Sidebar";
+import Navbar from "../../components/navbar/Navbar";
 
 
 const Profile = () => {
@@ -84,8 +85,9 @@ const Profile = () => {
   return (
     <div className="profile">
         <Sidebar/>
-        <div className="profile container">
-            <div className="profilecon">
+        <div className="profileContainer">
+          <Navbar/>
+            <div className="profileCon">
                 <form  onSubmit={handleSubmit}>
                     {inputs.map((input) => (
                         <ProfForm 
