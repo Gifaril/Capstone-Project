@@ -20,7 +20,7 @@ const Sidebar = () => {
         <div className="sidebar">
             <div className="top">
                 <span className="logo">
-                    KLTCstudentPortal</span>
+                    KLTC</span>
             </div>
             <hr/>
             <div className="center">
