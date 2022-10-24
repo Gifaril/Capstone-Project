@@ -17,12 +17,10 @@ function authenticateToken(req, res, next) {
   
     if (token == null) return res.sendStatus(401)
   
-    jwt.verify(token, 'SECRET123', (err, id) => {
-      console.log(err)
-  
+    jwt.verify(token, 'SECRET123', (err, data) => {  
       if (err) return res.sendStatus(403)
   
-      req.id = id
+      req.id = data.id
   
       next()
     })
@@ -188,6 +186,44 @@ const server = async ()=> {
         } catch (error) {
             console.error(error)
             res.status(500).send('Something went wrong!')
+        }
+    })
+
+    app.post('/api/announcement', authenticateToken, async (req, res)=> {
+        const body = req.body
+        const query = {
+            text: `
+            INSERT INTO announcements(title, admin_id) VALUES($1, $2)
+            `,
+            values: [body.title, req.id],
+          }
+        try {
+            await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: body
+            })    
+        } catch (error) {
+            console.error(error)
+            res.status(500).send('Something went wrong!')
+        }
+    })
+
+    app.get('/api/announcement', authenticateToken, async (req, res)=> {
+        console.log(req)
+        const query = {
+            text: `
+            SELECT * FROM announcements
+            `,
+          }
+        try {
+            const response = await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: response.rows
+            })  
+        } catch (error) {
+            console.error(error)
         }
     })
 
