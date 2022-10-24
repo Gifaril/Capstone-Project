@@ -6,7 +6,7 @@ import ModelTrainingIcon from '@mui/icons-material/ModelTraining';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate  } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 
 const Sidebar = () => {
@@ -28,23 +28,23 @@ const Sidebar = () => {
                     <p className="title">Main</p>
                     <li>
                         <DashboardOutlinedIcon className="icon"/>
-                        <span>Dashboard</span>
+                        <Link to="/"><span>Dashboard</span></Link>
                     </li>
                     <li>
                         <PersonOutlineOutlinedIcon className="icon"/>
-                        <span>Profile</span>
+                        <Link to="/profile"><span>Profile</span></Link>
                     </li>
                     <li>
                         <SchoolOutlinedIcon className="icon"/>
-                        <span>Education</span>
+                        <Link to="/education"><span>Education</span></Link>
                     </li>
                     <li>
                         <WorkOutlineIcon className="icon"/>
-                        <span>Experiences</span>
+                        <Link to="/experiences"><span>Experiences</span></Link>
                     </li>
                     <li>
                         <ModelTrainingIcon className="icon"/>
-                        <span>Trainings and Seminars</span>
+                        <Link to="/trainings"><span>Trainings and Seminars</span></Link>
                     </li>
                     <p className="title">USER</p>
                     <li onClick={handleLogout}>

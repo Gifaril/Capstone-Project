@@ -1,4 +1,4 @@
-import "./trainings&seminars.scss"
+import "./trainingSchedule.scss";
 
 const Trainings = () => {
     return (

@@ -3,6 +3,7 @@ import Sidebar from '../../components/sidebar/Sidebar';
 import Navbar from '../../components/navbar/Navbar';
 import { useState } from "react";
 import data from "./data.json";
+import EducModal from "../../components/educModal/EducModal";
 
 const Educ = () => {
     const [values, setValues] = useState(data);
@@ -16,6 +17,7 @@ const Educ = () => {
                     <div className="education">
                         <div className='educTop'>
                             <p>Educational Attainment</p>
+                            <EducModal show="modalShow"/>
                         </div>
                         <table>
                             <thead>

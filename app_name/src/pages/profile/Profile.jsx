@@ -88,7 +88,7 @@ const Profile = () => {
         <div className="profileContainer">
           <Navbar/>
             <div className="profileCon">
-                <form  onSubmit={handleSubmit}>
+                <form className="profForm" onSubmit={handleSubmit}>
                     {inputs.map((input) => (
                         <ProfForm 
                             key={input.id}

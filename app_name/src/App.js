@@ -1,7 +1,7 @@
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
-import Trainings from "./pages/trainings&seminars/Trainings";
+import TrainingsSchedule from "./pages/trainingsSchedule/TrainingsSchedule";
 import Experiences from "./pages/experiences/Experiences";
 import Educ from "./pages/education/Educ";
 import Profile from "./pages/profile/Profile";
@@ -33,7 +33,7 @@ function App() {
           <Route path="profile" element={<Profile/>}/>
           <Route path="experiences" element={<Experiences/>}/>
           <Route path="education" element={<Educ/>}/>
-          <Route path="trainings" element={<Trainings/>}/>
+          <Route path="schedule" element={<TrainingsSchedule/>}/>
         </Route>
       </Routes>
     </BrowserRouter>,

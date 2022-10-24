@@ -23,15 +23,20 @@
     }
 
 .education{
-  min-width: 73vw;
+  width: 73vw;
 }
 .educTop{
-    background-color: black;
+    background-color: grey;
     color: white;
     font-weight: bold;
-    font-size: 1.3rem;
-    height: 6vh;
+    font-size: 1.7rem;
+    height: 12vh;
     width: 100%;
+   
+}
+p{
+  display: inline;
+ 
 }
 
 table, th, td {
@@ -39,43 +44,40 @@ table, th, td {
   border-bottom: 1px solid #555;
 }
 
-     table {
-        border-collapse: collapse;
-        width: 100%;
-        
-        
-      }
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
 
-      th,
-        td {
-        text-align: left;
-        padding: 8px;
-        font-size: 1.2rem;
-        bottom: 1px solid #555;
-        }
-        th {
-           background-color: white;
-           height: 5vh;
-           width: 5vw;
-
-         }
+th,
+  td {
+  text-align: left;
+  padding: 8px;
+  font-size: 1.2rem;
+  bottom: 1px solid #555;
+  }
+  th {
+   background-color: white;
+   height: 5vh;
+   width: 5vw;
+  }
          
-         td {
-           background-color: white;
-           border: 1px solid #555;
-           
-         }
+td {
+  background-color: white;
+  border: 1px solid #555;
+ }
+form {
+  display: flex;
+  gap: 5px;
+  }
+        
+form td:last-child {
+  display: flex;
+  justify-content: space-evenly;
+  }
+        
+ form {
+  font-size: 12px;
+ }
          
-         form {
-           display: flex;
-           gap: 5px;
-         }
-         
-         form td:last-child {
-           display: flex;
-           justify-content: space-evenly;
-         }
-         
-         form {
-           font-size: 18rem;
-         }
+       
