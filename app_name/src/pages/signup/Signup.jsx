@@ -71,8 +71,8 @@ const Signup = () => {
   };
 
   return (
-    <div className="app">
-      <form onSubmit={handleSubmit}>
+    <div className="app-signup">
+      <form className="form2" onSubmit={handleSubmit}>
         <h1>Register</h1>
         {inputs.map((input) => (
           <FormInput

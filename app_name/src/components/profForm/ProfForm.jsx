@@ -8,7 +8,7 @@ const ProfForm = (props) => {
   return (
     <div style={{marginBottom: '2px'}} className="profForm">
       <label style={{marginBottom: 0}}>{label}</label>
-      <input
+      <input className='inputProfile'
         style={{marginTop: 0}}
         {...inputProps}
         onChange={onChange}

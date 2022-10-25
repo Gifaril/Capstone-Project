@@ -14,7 +14,7 @@ const NewAnn = (props) => {
 
   return (
     <>
-    <Button className="add" variant="primary" onClick={handleShow}>
+    <Button className="addAnn" variant="primary" onClick={handleShow}>
         ADD
       </Button>
 

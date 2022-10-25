@@ -1,12 +1,12 @@
 import "./sidebar.scss"
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import ModelTrainingIcon from '@mui/icons-material/ModelTraining';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate  } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Pic from "../../components/pic/avatar2-removebg-preview.png";
 
 
 const Sidebar = () => {
@@ -20,7 +20,9 @@ const Sidebar = () => {
         <div className="sidebar">
             <div className="top">
                 <span className="logo">
-                    KLTC</span>
+                    KLTC PORTAL</span>
+                <img src={Pic} alt="pic"/>
+                <span className="name"> Gifaril Mae Nisperos</span>
             </div>
             <hr/>
             <div className="center">
@@ -39,12 +41,8 @@ const Sidebar = () => {
                         <Link to="/education"><span>Education</span></Link>
                     </li>
                     <li>
-                        <WorkOutlineIcon className="icon"/>
-                        <Link to="/experiences"><span>Experiences</span></Link>
-                    </li>
-                    <li>
                         <ModelTrainingIcon className="icon"/>
-                        <Link to="/trainings"><span>Trainings and Seminars</span></Link>
+                        <Link to="/training"><span>Trainings</span></Link>
                     </li>
                     <p className="title">USER</p>
                     <li onClick={handleLogout}>
