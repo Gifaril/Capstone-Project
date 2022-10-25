@@ -1,6 +1,6 @@
 import "./sidebar.scss"
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import DocumentScannerOutlinedIcon from '@mui/icons-material/DocumentScannerOutlined';
 import ModelTrainingIcon from '@mui/icons-material/ModelTraining';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -33,16 +33,16 @@ const Sidebar = () => {
                         <Link to="/"><span>Dashboard</span></Link>
                     </li>
                     <li>
-                        <PersonOutlineOutlinedIcon className="icon"/>
-                        <Link to="/profile"><span>Profile</span></Link>
-                    </li>
-                    <li>
                         <SchoolOutlinedIcon className="icon"/>
-                        <Link to="/education"><span>Education</span></Link>
+                        <Link to="/batch"><span>Batch</span></Link>
                     </li>
                     <li>
                         <ModelTrainingIcon className="icon"/>
                         <Link to="/training"><span>Trainings</span></Link>
+                    </li>
+                    <li>
+                        <DocumentScannerOutlinedIcon className="icon"/>
+                        <Link to="/reviewer"><span>Reviewer</span></Link>
                     </li>
                     <p className="title">USER</p>
                     <li onClick={handleLogout}>
@@ -50,10 +50,6 @@ const Sidebar = () => {
                         <span>Logout</span>
                     </li>
                 </ul>
-            </div>
-            <div className="bottom">
-                <div className="colorOption"></div>
-                <div className="colorOption"></div>
             </div>
         </div>
         

@@ -7,7 +7,7 @@ const cors = require('cors');
 
 
 function generateAccessToken(id) {
-    return jwt.sign(id, 'SECRET123', { expiresIn: '1800s' });
+    return jwt.sign(id, 'SECRET123', { expiresIn: '1d' });
   }
 
 
@@ -17,12 +17,10 @@ function authenticateToken(req, res, next) {
   
     if (token == null) return res.sendStatus(401)
   
-    jwt.verify(token, 'SECRET123', (err, id) => {
-      console.log(err)
-  
+    jwt.verify(token, 'SECRET123', (err, data) => {  
       if (err) return res.sendStatus(403)
   
-      req.id = id
+      req.id = data.id
   
       next()
     })
@@ -97,6 +95,125 @@ const server = async ()=> {
         const query = {
             text: `
             SELECT * FROM admins
+            `,
+          }
+        try {
+            const response = await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: response.rows
+            })  
+        } catch (error) {
+            console.error(error)
+        }
+    })
+
+    app.get('/api/batch', authenticateToken, async (req, res)=> {
+        console.log(req)
+        const query = {
+            text: `
+            SELECT * FROM batch
+            `,
+          }
+        try {
+            const response = await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: response.rows
+            })  
+        } catch (error) {
+            console.error(error)
+        }
+    })
+
+    app.post('/api/batch', authenticateToken, async (req, res)=> {
+        const body = req.body
+        const query = {
+            text: `
+            INSERT INTO batch(batch_name, batch_date) VALUES($1, $2)
+            `,
+            values: [body.batch_name, body.batch_date],
+          }
+        try {
+            await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: body
+            })    
+        } catch (error) {
+            console.error(error)
+            res.status(500).send('Something went wrong!')
+        }
+    })
+
+    app.get('/api/students', authenticateToken, async (req, res)=> {
+        console.log(req)
+        const query = {
+            text: `
+            SELECT * FROM students
+            `,
+          }
+        try {
+            const response = await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: response.rows
+            })  
+        } catch (error) {
+            console.error(error)
+        }
+    })
+
+    app.post('/api/students', authenticateToken, async (req, res)=> {
+        const body = req.body
+        if (!validator.validate(body.email)){
+            res.status(500).send('Email is not valid')
+            return
+        }
+        const hashPassword = await argon2.hash(body.password)
+        const query = {
+            text: `
+            INSERT INTO students(first_name, last_name, password, email, age, birthdate, batch_id, created_on) VALUES($1, $2, $3, $4, $5, $6, $7, $8)
+            `,
+            values: [body.first_name, body.last_name, hashPassword, body.email, body.age, body.birthdate, body.batch_id, new Date()],
+          }
+        try {
+            await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: body
+            })    
+        } catch (error) {
+            console.error(error)
+            res.status(500).send('Something went wrong!')
+        }
+    })
+
+    app.post('/api/announcement', authenticateToken, async (req, res)=> {
+        const body = req.body
+        const query = {
+            text: `
+            INSERT INTO announcements(title, admin_id) VALUES($1, $2)
+            `,
+            values: [body.title, req.id],
+          }
+        try {
+            await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: body
+            })    
+        } catch (error) {
+            console.error(error)
+            res.status(500).send('Something went wrong!')
+        }
+    })
+
+    app.get('/api/announcement', authenticateToken, async (req, res)=> {
+        console.log(req)
+        const query = {
+            text: `
+            SELECT * FROM announcements
             `,
           }
         try {

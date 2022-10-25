@@ -1,12 +1,32 @@
 import './educ.css';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Navbar from '../../components/navbar/Navbar';
-import { useState } from "react";
-import data from "./data.json";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import EducModal from "../../components/educModal/EducModal";
 
 const Educ = () => {
-    const [values, setValues] = useState(data);
+    const [values, setValues] = useState([]);
+            
+    const fetchData = async () => {
+        const token = window.localStorage.getItem('token')
+
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+        const res = await axios.get('http://localhost:8080/api/batch', config);
+        console.log(res.data)
+        setValues(res.data.data);
+    
+    }
+
+    useEffect(() => {
+      
+        // call the function
+        fetchData()
+          // make sure to catch any error
+          .catch(console.error);;
+      }, [])
 
     return (
         <div className="educ">
@@ -16,25 +36,21 @@ const Educ = () => {
                 <div className="educations">
                     <div className="education">
                         <div className='educTop'>
-                            <p>Educational Attainment</p>
-                            <EducModal show="modalShow"/>
+                            <p>Batch</p>
+                            <EducModal fetchData={fetchData} show="modalShow"/>
                         </div>
                         <table>
                             <thead>
                                 <th></th>
-                                <th>Category</th>
-                                <th>Year</th>
-                                <th>School</th>
-                                <th>Course</th>
+                                <th>Batch name</th>
+                                <th>Date</th>
                             </thead>
                             <tbody>
                                 {values.map((value)=> (
                                 <tr>
                                     <td></td>
-                                    <td>{value.Category}</td>
-                                    <td>{value.Year}</td>
-                                    <td>{value.School}</td>
-                                    <td>{value.Course}</td>
+                                    <td>{value.batch_name}</td>
+                                    <td>{value.batch_date}</td>
                                 </tr>))}
                             </tbody>
                         </table>

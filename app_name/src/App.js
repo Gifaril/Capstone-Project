@@ -1,9 +1,8 @@
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
-import Trainings from "./pages/trainings/Trainings";
 import Educ from "./pages/education/Educ";
-import Profile from "./pages/profile/Profile";
+import Reviewer from "./pages/reviewer/Reviewer";
 
 
 import {
@@ -29,9 +28,8 @@ function App() {
         <Route path="login" element={<Login/>} />
         <Route path="/">
           <Route index element={<Home/>} />
-          <Route path="profile" element={<Profile/>}/>
-          <Route path="education" element={<Educ/>}/>
-          <Route path="training" element={<Trainings/>}/>
+          <Route path="reviewer" element={<Reviewer/>}/>
+          <Route path="batch" element={<Educ/>}/>
         </Route>
       </Routes>
     </BrowserRouter>,

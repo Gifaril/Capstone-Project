@@ -38,9 +38,9 @@ function Login() {
 
   // JSX code for login form
   const renderForm = (
-    <div className="form-login">
-      <form className="form1" onSubmit={handleSubmit}>
-        <div className="input-container">
+    <div className="login-form">
+      <form onSubmit={handleSubmit}>
+        <div className="input-containers">
           <label>Email </label>
           <input type="text" name="uname" required />
           {renderErrorMessage("uname")}
