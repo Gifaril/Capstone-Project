@@ -36,7 +36,7 @@ const Sidebar = () => {
                     </li>
                     <li>
                         <SchoolOutlinedIcon className="icon"/>
-                        <Link to="/education"><span>Education</span></Link>
+                        <Link to="/batch"><span>Batch</span></Link>
                     </li>
                     <li>
                         <WorkOutlineIcon className="icon"/>

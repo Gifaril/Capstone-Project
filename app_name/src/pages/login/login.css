@@ -1,4 +1,4 @@
-.app {
+.app-login {
     font-family: sans-serif;
     display: flex;
     align-items: center;
@@ -47,6 +47,8 @@
       background-color: white;
       padding: 0px 60px;
       border-radius: 10px;
+      width: 30vw;
+      height: 40vh;
   }
   
   .list-container {
@@ -66,12 +68,12 @@
     color: rgb(77, 1, 77);
   }
   
-  .input-container {
+   .input-containers {
     display: flex;
     flex-direction: column;
     gap: 8px;
     margin: 10px;
-  }
+  } 
 
   label {
     font-size: 5em;

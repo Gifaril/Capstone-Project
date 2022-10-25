@@ -7,7 +7,7 @@ const cors = require('cors');
 
 
 function generateAccessToken(id) {
-    return jwt.sign(id, 'SECRET123', { expiresIn: '1800s' });
+    return jwt.sign(id, 'SECRET123', { expiresIn: '1d' });
   }
 
 

@@ -1,15 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./home.scss";
-import data from "./mock-data.json";
+import axios from "axios";
 import MenuIcon from '@mui/icons-material/Menu';
 import EditIcon from '@mui/icons-material/Edit';
 import Modal from "../../components/modal/ModalTwo";
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const Home = () => {
-    const [values, setValues] = useState(data);
+    const [values, setValues] = useState([]);
+            
+    const fetchData = async () => {
+        const token = window.localStorage.getItem('token')
+
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+        const res = await axios.get('http://localhost:8080/api/announcement', config);
+        console.log(res.data)
+        setValues(res.data.data);
+    
+    }
+
+    useEffect(() => {
+      
+        // call the function
+        fetchData()
+          // make sure to catch any error
+          .catch(console.error);;
+      }, [])
 
     return (
         <div className="home">
@@ -18,7 +38,7 @@ const Home = () => {
                 <Navbar/>
                 <div className="important-announcements">
                     <div className="announcement">
-                        <Modal show="modalShow"/>
+                        <Modal fetchData={fetchData} show="modalShow"/>
                         <table>
                             <thead>
                                 <tr>
@@ -28,8 +48,8 @@ const Home = () => {
                             </thead>
                             <tbody>
                                 {values.map((value)=> (
-                                <tr>
-                                    <td>{value.announcement}</td>
+                                <tr key={value.id}>
+                                    <td>{value.title}</td>
                                     <td className="edit"><EditIcon  className="icon"/>  <DeleteIcon className="icon"/></td>
                                 </tr>))} 
                             </tbody>
