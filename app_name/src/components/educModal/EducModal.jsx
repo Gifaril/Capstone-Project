@@ -6,9 +6,9 @@ import axios from "axios";
 
 const EducModal = (props) => {
     console.log(props)
-  const [show, setShow] = useState(false);
-  const [name, setName] = useState('');
-  const [date, setDate] = useState('2022-10-11');
+    const [show, setShow] = useState(false);
+    const [name, setName] = useState('');
+    const [date, setDate] = useState('2022-10-11');
 
 
 
@@ -53,12 +53,10 @@ const EducModal = (props) => {
         </Modal.Header>
         <Modal.Body>
          <div className="Educwrapper">
-                <textarea value={name} onChange={e=> setName(e.target.value)} placeholder="Name" label="Category"></textarea>
-                <input type="date" onChange={e=> setDate(e.target.value)}
-       value={date}
-       min="2018-01-01" max="2018-12-31"/>
-                
-                
+              <textarea value={name} onChange={e=> setName(e.target.value)} placeholder="Last Name" label="Category"></textarea>
+              <textarea value={name} onChange={e=> setName(e.target.value)} placeholder="First Name" label="Category"></textarea>
+              <textarea value={name} onChange={e=> setName(e.target.value)} placeholder="Middle Name" label="Category"></textarea>    
+              <textarea value={name} onChange={e=> setName(e.target.value)} placeholder="Batch No." label="Category"></textarea>   
          </div>
         </Modal.Body>
         <Modal.Footer>

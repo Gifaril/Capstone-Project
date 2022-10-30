@@ -3,6 +3,7 @@ import Sidebar from '../../components/sidebar/Sidebar';
 import { useState, useEffect } from "react";
 import axios from "axios";
 import EducModal from "../../components/educModal/EducModal";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Educ = () => {
     const [values, setValues] = useState([]);
@@ -43,12 +44,14 @@ const Educ = () => {
                                 <th> First Name</th>
                                 <th> Middle Name</th>
                                 <th> Batch</th>
+                                <th>Action</th>
                             </thead>
                             <tbody>
                                 {values.map((value)=> (
                                 <tr>
                                     <td>{value.batch_name}</td>
                                     <td>{value.batch_date}</td>
+                                    <td className="delete"><DeleteIcon/></td>
                                 </tr>))}
                             </tbody>
                         </table>

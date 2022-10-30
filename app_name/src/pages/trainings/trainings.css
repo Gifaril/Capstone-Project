@@ -12,3 +12,12 @@
 .TrainingContainer{
     flex:6;
 }
+
+.trainTop{
+    background-color: grey;
+    color: white;
+    font-weight: bold;
+    font-size: 1.7rem;
+    height: 12vh;
+    width: 100%;
+}
