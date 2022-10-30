@@ -35,7 +35,6 @@ const Home = () => {
         <div className="home">
             <Sidebar/>
             <div className="homeContainer">
-                <Navbar/>
                 <div className="important-announcements">
                     <div className="announcement">
                         <Modal fetchData={fetchData} show="modalShow"/>

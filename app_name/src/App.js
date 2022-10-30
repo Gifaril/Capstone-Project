@@ -3,6 +3,7 @@ import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
 import Educ from "./pages/education/Educ";
 import Reviewer from "./pages/reviewer/Reviewer";
+import Trainings from "./pages/trainings/Trainings";
 
 
 import {
@@ -30,6 +31,7 @@ function App() {
           <Route index element={<Home/>} />
           <Route path="reviewer" element={<Reviewer/>}/>
           <Route path="batch" element={<Educ/>}/>
+          <Route path="trainings" element={<Trainings/>}/>
         </Route>
       </Routes>
     </BrowserRouter>,

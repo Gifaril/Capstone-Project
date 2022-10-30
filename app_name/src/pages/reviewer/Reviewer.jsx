@@ -16,7 +16,6 @@ const Reviewer = () => {
         <div className="reviewer">
             <Sidebar/>
             <div className="RevContainer">
-                <Navbar/>
                 <div className="Rev">
                     <FileUpload files={files} setFiles={setFiles}
                     removeFile={removeFile} />

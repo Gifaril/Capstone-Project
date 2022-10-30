@@ -35,7 +35,7 @@ const EducModal = (props) => {
   return (
     <>
     <Button className="addEduc" variant="primary" onClick={handleShow}>
-        Add Batch
+        Add Student
       </Button>
 
       <Modal

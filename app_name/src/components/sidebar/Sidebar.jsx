@@ -38,7 +38,7 @@ const Sidebar = () => {
                     </li>
                     <li>
                         <ModelTrainingIcon className="icon"/>
-                        <Link to="/training"><span>Trainings</span></Link>
+                        <Link to="/trainings"><span>Trainings</span></Link>
                     </li>
                     <li>
                         <DocumentScannerOutlinedIcon className="icon"/>

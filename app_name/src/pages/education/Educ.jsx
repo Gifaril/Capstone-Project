@@ -1,6 +1,5 @@
 import './educ.css';
 import Sidebar from '../../components/sidebar/Sidebar';
-import Navbar from '../../components/navbar/Navbar';
 import { useState, useEffect } from "react";
 import axios from "axios";
 import EducModal from "../../components/educModal/EducModal";
@@ -32,23 +31,22 @@ const Educ = () => {
         <div className="educ">
             <Sidebar/>
             <div className="educContainer">
-                <Navbar/>
                 <div className="educations">
                     <div className="education">
                         <div className='educTop'>
-                            <p>Batch</p>
+                            <p>Students</p>
                             <EducModal fetchData={fetchData} show="modalShow"/>
                         </div>
                         <table>
                             <thead>
-                                <th></th>
-                                <th>Batch name</th>
-                                <th>Date</th>
+                                <th> Last Name</th>
+                                <th> First Name</th>
+                                <th> Middle Name</th>
+                                <th> Batch</th>
                             </thead>
                             <tbody>
                                 {values.map((value)=> (
                                 <tr>
-                                    <td></td>
                                     <td>{value.batch_name}</td>
                                     <td>{value.batch_date}</td>
                                 </tr>))}
