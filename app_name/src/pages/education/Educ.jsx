@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import EducModal from "../../components/educModal/EducModal";
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 const Educ = () => {
     const [values, setValues] = useState([]);
@@ -43,8 +44,9 @@ const Educ = () => {
                                 <th> Last Name</th>
                                 <th> First Name</th>
                                 <th> Batch</th>
-                                <th>email</th>
-                                <th>age</th>
+                                <th> Age</th>
+                                <th> Email</th>
+                                <th>Actions</th>
 
                             </thead>
                             <tbody>
@@ -53,8 +55,9 @@ const Educ = () => {
                                     <td>{value.last_name}</td>
                                     <td>{value.first_name}</td>
                                     <td>{value.batch_id}</td>
-                                    <td>{value.email}</td>
                                     <td>{value.age}</td>
+                                    <td>{value.email}</td>
+                                    <td><EditIcon/><DeleteIcon/></td>
                                 </tr>))}
                             </tbody>
                         </table>

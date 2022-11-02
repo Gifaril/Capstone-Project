@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./home.scss";
 import axios from "axios";
@@ -57,7 +56,7 @@ const Home = () => {
                                     <td>{value.title}</td>
                                     <td>{value.created_at.split('T')[0]}</td>
                                     {user === 'admin' ? 
-                                    <td className="edit"><DeleteIcon className="icon"/></td>
+                                    <td className="actions"><DeleteIcon className="icon"/></td>
                                     : null
                                     }
                                 </tr>))} 

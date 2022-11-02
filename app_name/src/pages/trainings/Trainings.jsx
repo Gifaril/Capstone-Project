@@ -4,6 +4,7 @@ import TrainingsModal from "../../components/trainingsMod/TrainingsModal";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 const Trainings = () => {
 
@@ -31,7 +32,7 @@ const Trainings = () => {
                             <td>3 Days</td>
                             <td>HACCP </td>
                             <td>Gensan HSOASO</td>
-                            <td className="delete"><DeleteIcon/></td>
+                            <td className="action"><DeleteIcon/><EditIcon/></td>
                         </tr>
                     </tbody>
                 </table>
