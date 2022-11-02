@@ -1,21 +1,21 @@
 import React from 'react'
 import DescriptionIcon from '@mui/icons-material/Description';
-import DeleteIcon from '@mui/icons-material/Delete';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import './fileItem.scss'
 
-const FileItem = ({ file, deleteFile }) => {
+const FileItem = ({ file, downloadFile }) => {
     return (
         <>
             <li
                 className="file-item"
-                key={file.name}>
+                key={file.file_id}>
                 <DescriptionIcon/>
-                <p className='Pp'>{file.name}</p>
+                <p className='Pp'>{file.file_name}</p>
                 <div className="actions">
                     <div className="loading"></div>
                     {!file.isUploading &&
-                        <DeleteIcon
-                            onClick={() => deleteFile(file.name)} />
+                        <FileDownloadIcon
+                            onClick={() => downloadFile(file.file_id)} />
                     }
                 </div>
             </li>

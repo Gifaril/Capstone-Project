@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate  } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import "./login.css";
 
 function Login() {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
+  const [userType, setUserType] = useState('admin')
   const navigate = useNavigate()
 
 
@@ -15,14 +16,14 @@ function Login() {
     event.preventDefault();
 
     var { uname, pass } = document.forms[0];
-    console.log(uname.value, pass)
     // Find user login info
     try {
-        const response = await axios.post('http://localhost:8080/api/admin/login', {
+        const response = await axios.post('http://localhost:8080/api/login', {
         password: pass.value,
-        email: uname.value
+        email: uname.value,
+        type: userType
         }); 
-        console.log(response)
+        window.localStorage.setItem('userType', userType)
         window.localStorage.setItem('token', response.data.token)
         navigate(`/`)
     } catch (error) {
@@ -50,6 +51,10 @@ function Login() {
           <input type="password" name="pass" required />
           {renderErrorMessage("pass")}
         </div>
+        <select onChange={(e)=> setUserType(e.target.value)} id="user" name="users">
+          <option value="student">Student</option>
+          <option value="admin">Admin</option>
+        </select>
         <div className="button-container">
           <input type="submit" />
         </div>
@@ -62,6 +67,8 @@ function Login() {
       <div className="login-form">
         <div className="title">SIGN IN</div>
         {renderForm}
+        <p className="account">Need an Account?</p>
+        <Link to="/signup">Sign Up</Link>
       </div>
     </div>
   );

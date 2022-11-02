@@ -10,10 +10,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const Home = () => {
     const [values, setValues] = useState([]);
-            
+    const [user, setUser] = useState('')
+
     const fetchData = async () => {
         const token = window.localStorage.getItem('token')
-
+        const userType = window.localStorage.getItem('userType')
+        setUser(userType)
     const config = {
         headers: { Authorization: `Bearer ${token}` }
     };
@@ -42,14 +44,22 @@ const Home = () => {
                             <thead>
                                 <tr>
                                     <th>ANNOUNCEMENTS </th>
+                                    <th>DATE</th>
+                                    {user === 'admin' ? 
                                     <th className="menu"><MenuIcon className="icon"/></th>
+                                    : null
+                                    }
                                 </tr>
                             </thead>
                             <tbody>
                                 {values.map((value)=> (
                                 <tr key={value.id}>
                                     <td>{value.title}</td>
-                                    <td className="edit"><EditIcon  className="icon"/>  <DeleteIcon className="icon"/></td>
+                                    <td>{value.created_at.split('T')[0]}</td>
+                                    {user === 'admin' ? 
+                                    <td className="edit"><DeleteIcon className="icon"/></td>
+                                    : null
+                                    }
                                 </tr>))} 
                             </tbody>
                         </table>

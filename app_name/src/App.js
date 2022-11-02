@@ -27,7 +27,7 @@ function App() {
       <Routes>
       <Route path="signup" element={<Signup/>} />
         <Route path="login" element={<Login/>} />
-        <Route path="/">
+        <Route element={<ProptectedRoute/>}  path="/">
           <Route index element={<Home/>} />
           <Route path="reviewer" element={<Reviewer/>}/>
           <Route path="batch" element={<Educ/>}/>

@@ -14,7 +14,7 @@ const Educ = () => {
     const config = {
         headers: { Authorization: `Bearer ${token}` }
     };
-        const res = await axios.get('http://localhost:8080/api/batch', config);
+        const res = await axios.get('http://localhost:8080/api/students', config);
         console.log(res.data)
         setValues(res.data.data);
     
@@ -42,16 +42,19 @@ const Educ = () => {
                             <thead>
                                 <th> Last Name</th>
                                 <th> First Name</th>
-                                <th> Middle Name</th>
                                 <th> Batch</th>
-                                <th>Action</th>
+                                <th>email</th>
+                                <th>age</th>
+
                             </thead>
                             <tbody>
                                 {values.map((value)=> (
                                 <tr>
-                                    <td>{value.batch_name}</td>
-                                    <td>{value.batch_date}</td>
-                                    <td className="delete"><DeleteIcon/></td>
+                                    <td>{value.last_name}</td>
+                                    <td>{value.first_name}</td>
+                                    <td>{value.batch_id}</td>
+                                    <td>{value.email}</td>
+                                    <td>{value.age}</td>
                                 </tr>))}
                             </tbody>
                         </table>

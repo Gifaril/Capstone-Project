@@ -2,29 +2,16 @@ const express = require('express')
 var validator = require("email-validator");
 const db = require('./db')
 const argon2 = require('argon2');
-const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const addAdmin = require('./ctrl/admin/CreateAdmin')
+const authenticateToken = require('./jwt/AuthenticateToken')
+const login = require('./ctrl/auth/Login')
+const AWS = require('aws-sdk')
 
-
-function generateAccessToken(id) {
-    return jwt.sign(id, 'SECRET123', { expiresIn: '1d' });
-  }
-
-
-function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
-  
-    if (token == null) return res.sendStatus(401)
-  
-    jwt.verify(token, 'SECRET123', (err, data) => {  
-      if (err) return res.sendStatus(403)
-  
-      req.id = data.id
-  
-      next()
-    })
-  }
+AWS.config.update({
+    accessKeyId: 'AKIATBIOLDO7GKUTHIHT',
+    secretAccessKey: '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'
+})
 
 const server = async ()=> {
     const app = express()
@@ -35,62 +22,11 @@ const server = async ()=> {
 
     app.use(express.json())
 
-    app.post('/api/admin/create', async (req, res)=> {
-        const body = req.body
-        if (!validator.validate(body.email)){
-            res.status(500).send('Email is not valid')
-            return
-        }
-        const hashPassword = await argon2.hash(body.password)
-        console.log(hashPassword)
-        const query = {
-            text: `
-            INSERT INTO admins(first_name, last_name, password, email) VALUES($1, $2, $3, $4)
-            `,
-            values: [body.first_name, body.last_name, hashPassword, body.email],
-          }
-        try {
-            await db.query(query)
-            res.status(200).json({
-                status: 'success',
-                data: body
-            })    
-        } catch (error) {
-            console.error(error)
-            res.status(500).send('Something went wrong!')
-        }
-    })
+    app.post('/api/admin/create', addAdmin)
 
-    app.post('/api/admin/login', async (req, res)=> {
-        const body = req.body
+    app.post('/api/login', login)
 
-        const query = {
-            text: `
-            SELECT * FROM admins
-            WHERE email = $1
-            `,
-            values: [body.email]
-          }
-        try {
-            const response = await db.query(query)
-            const data = response.rows[0]
-            if (!data){
-              return  res.status(500).send('Invalid credentials!')
-            }
-            if (await argon2.verify(data.password, body.password) === false){
-                return  res.status(500).send('Invalid credentials!')
-            }
-            res.status(200).json({
-                status: 'success',
-                data,
-                token: generateAccessToken({id:data.id})
-            })  
-        } catch (error) {
-            console.error(error)
-        }
-    })
-
-    app.get('/api/admin', authenticateToken, async (req, res)=> {
+    app.get('/api/admins', authenticateToken, async (req, res)=> {
         console.log(req)
         const query = {
             text: `
@@ -102,6 +38,33 @@ const server = async ()=> {
             res.status(200).json({
                 status: 'success',
                 data: response.rows
+            })  
+        } catch (error) {
+            console.error(error)
+        }
+    })
+
+    app.get('/api/admin', authenticateToken, async (req, res)=> {
+        console.log(req.id)
+        const query = {
+            text: `
+            SELECT * FROM admins
+            WHERE id = $1
+            `,
+            values: [req.id]
+          }
+        try {
+            const response = await db.query(query)
+            if (!response.rows[0]){
+                res.status(404).json({
+                    status: 'failed',
+                    message: 'user not found'
+                })
+                return
+            }
+            res.status(200).json({
+                status: 'success',
+                data: response.rows[0]
             })  
         } catch (error) {
             console.error(error)
@@ -152,6 +115,26 @@ const server = async ()=> {
             text: `
             SELECT * FROM students
             `,
+          }
+        try {
+            const response = await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: response.rows
+            })  
+        } catch (error) {
+            console.error(error)
+        }
+    })
+
+    app.get('/api/student', authenticateToken, async (req, res)=> {
+        console.log(req)
+        const query = {
+            text: `
+            SELECT * FROM students
+            WHERE id = $1
+            `,
+            values: [req.id]
           }
         try {
             const response = await db.query(query)
@@ -221,6 +204,75 @@ const server = async ()=> {
             res.status(200).json({
                 status: 'success',
                 data: response.rows
+            })  
+        } catch (error) {
+            console.error(error)
+        }
+    })
+
+    app.post('/api/file', authenticateToken, async (req, res)=> {
+        const body = req.body
+        const query = {
+            text: `
+            INSERT INTO files(file_name) VALUES($1)
+            `,
+            values: [body.file_name],
+          }
+        try {
+            await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: body
+            })    
+        } catch (error) {
+            console.error(error)
+            res.status(500).send('Something went wrong!')
+        }
+    })
+
+    app.get('/api/files', authenticateToken, async (req, res)=> {
+        console.log(req)
+        const query = {
+            text: `
+            SELECT * FROM files
+            `,
+          }
+        try {
+            const response = await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: response.rows
+            })  
+        } catch (error) {
+            console.error(error)
+        }
+    })
+
+    
+      app.get('/api/file/:file_id/download', authenticateToken, async (req, res)=> {
+        console.log(req.params.file_id)
+        const query = {
+            text: `
+            SELECT * FROM files
+            WHERE file_id = $1
+            `,
+            values: [req.params.file_id],
+          }
+        try {
+
+            const s3 = new AWS.S3({
+                region: 'ap-southeast-1',
+            })
+            const response = await db.query(query)
+            console.log(response)
+            const rep = await s3.getSignedUrlPromise('getObject',{
+                Bucket: 'capstone-upload',
+                Key: response.rows[0].file_name,
+                Expires: 1000,
+              })
+            res.status(200).json({
+                status: 'success',
+                data: rep
             })  
         } catch (error) {
             console.error(error)

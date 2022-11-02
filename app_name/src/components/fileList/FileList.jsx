@@ -3,9 +3,16 @@ import FileItem from "../../components/fileItem/FileItem";
 import axios from 'axios'
 
 const FileList = ({ files, removeFile }) => {
-    const deleteFileHandler = (_name) => {
-        axios.delete(`http://localhost:8080/upload?name=${_name}`)
-            .then((res) => removeFile(_name))
+    const downloadHandler = (id) => {
+        const token = window.localStorage.getItem('token')
+
+        const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            };
+        axios.get(`http://localhost:8080/api/file/${id}/download`, config)
+            .then((res) => {
+                console.log(res)
+                window.open(res.data.data)})
             .catch((err) => console.error(err));
     }
     return (
@@ -13,9 +20,9 @@ const FileList = ({ files, removeFile }) => {
             {
                 files &&
                 files.map(f => (<FileItem
-                    key={f.name}
+                    key={f.file_id}
                     file={f}
-                    deleteFile={deleteFileHandler} />))
+                    downloadFile={downloadHandler} />))
             }
         </ul>
     )
