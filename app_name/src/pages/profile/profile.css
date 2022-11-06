@@ -1,0 +1,30 @@
+.Profile{
+    display: flex;
+    background: linear-gradient(
+       rgba(255, 255, 255, 0.7),
+       rgba(255, 255, 255, 0.3)
+     ),
+       url("https://images.pexels.com/photos/114979/pexels-photo-114979.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
+       background-size: cover;
+       background-position: center;
+    
+}
+.ProfileContainer{
+ flex:6;
+ align-items: center;
+    
+}
+.form3{
+    background-color: white;
+    padding: 0px 60px;
+    border-radius: 10px;
+    margin-top: 2rem;
+
+}
+.pic{
+    height: 30vh;
+    width: 20vw;
+    margin-top: 1rem;
+    margin-left: 30vw;
+}
+
