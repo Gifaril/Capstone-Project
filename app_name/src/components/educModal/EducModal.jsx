@@ -5,24 +5,11 @@ import "./educModal.css";
 import axios from "axios";
 
 const EducModal = (props) => {
-    console.log(props)
-    const [show, setShow] = useState(false);
-    const [fname, setfName] = useState('');
-    const [lname, setlName] = useState('');
-    const [email, setEmail] = useState('');
-    const [age, setAge] = useState(0);
-    const [birthdate, setBirthdate] = useState('2022-10-22');
     const [batchId, setbatchId] = useState('');
-    const [password, setpassword] = useState('');
 
 
     const [batch, setBatch] = useState([]);
 
-
-
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault()
@@ -30,18 +17,14 @@ const EducModal = (props) => {
 
   const config = {
       headers: { Authorization: `Bearer ${token}` }
-  };
-     await axios.post('http://localhost:8080/api/students',
+  }; 
+    console.log(props.student)
+     await axios.put(`http://localhost:8080/api/student/${props.student.student_id}/add_batch`,
     {
-      first_name: fname,
-      last_name: lname,
-      password: password,
-      email: email,
-      birthdate: birthdate,
-      age: parseInt(age),
       batch_id: parseInt(batchId)
       }, config);
       await props.fetchData()
+      props.handleClose()
   }
 
     const fetchData = async () => {
@@ -67,35 +50,22 @@ useEffect(() => {
 
   return (
     <>
-    <Button className="addEduc" variant="primary" onClick={handleShow}>
-        Add Student
-      </Button>
 
       <Modal
-        show={show}
-        onHide={handleClose}
+        show={props.show}
+        onHide={()=>props.handleClose()}
         backdrop="static"
         keyboard={false}
       >
         <Modal.Header closeButton>
           <Modal.Title>
             <div className="title">
-                <h6>Educational Details:</h6>
+                <h6>Add Batch to student:</h6>
             </div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
          <div className="Educwrapper">
-              <textarea value={fname} onChange={e=> setfName(e.target.value)} placeholder="Last Name" label="Category"></textarea>
-              <textarea value={lname} onChange={e=> setlName(e.target.value)} placeholder="First Name" label="Category"></textarea>
-              <textarea value={email} onChange={e=> setEmail(e.target.value)} placeholder="Email" label="Category"></textarea>   
-              <textarea value={age} onChange={e=> setAge(e.target.value)} placeholder="Age" label="Category"></textarea>   
-              <textarea value={password} onChange={e=> setpassword(e.target.value)} placeholder="password"  label="Category"></textarea>   
-
-              <label>Start date: </label>
-              <input onChange={(e)=> setBirthdate(e.target.value)} type="date" id="start" name="trip-start"
-              value={birthdate}
-              min="2022-10-01"></input> 
               <label >Select batch: </label>
               <select onChange={(e)=> setbatchId(e.target.value)} id="batch" name="batchs">
                 {batch.map((batchData)=> (

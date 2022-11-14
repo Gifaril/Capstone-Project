@@ -27,13 +27,16 @@ const NewAnn = (props) => {
       }, config);
       setAnnouncement('')
       await props.fetchData()
+      handleClose()
   }
 
   return (
     <>
-    <Button className="addAnn" variant="primary" onClick={handleShow}>
-        ADD
-      </Button>
+    {props.user === 'admin' ?
+      <Button className="addAnn" variant="primary" onClick={handleShow}>
+      ADD
+    </Button> : null 
+  }
 
       <Modal
         show={show}

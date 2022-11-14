@@ -65,13 +65,15 @@ const Sidebar = () => {
                         <DashboardOutlinedIcon className="icon"/>
                         <Link to="/"><span>Dashboard</span></Link>
                     </li>
-                    <li>
-                        <PeopleIcon className="icon"/>
-                        <Link to="/batch"><span>Students</span></Link>
-                    </li>
+                    {user === 'admin' ? 
+                        <li>
+                            <PeopleIcon className="icon"/>
+                            <Link to="/batch"><span>Students</span></Link>
+                        </li>   : null 
+                    }
                     <li>
                         <ModelTrainingIcon className="icon"/>
-                        <Link to="/trainings"><span>Trainings</span></Link>
+                        <Link to="/trainings"><span>Batch</span></Link>
                     </li>
                     <li>
                         <DocumentScannerOutlinedIcon className="icon"/>

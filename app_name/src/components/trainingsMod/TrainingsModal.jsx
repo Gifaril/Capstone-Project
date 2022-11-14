@@ -17,7 +17,7 @@ const handleOnSubmit = async (e) => {
     return (
         <>
         <Button className="addTraining" variant="primary" onClick={handleShow}>
-            Add Training
+            Add Batch
           </Button>
     
           <Modal
@@ -35,11 +35,9 @@ const handleOnSubmit = async (e) => {
             </Modal.Header>
             <Modal.Body>
              <div className="Trainingwrapper">
-                    <textarea placeholder="Training Name:" label="Category"></textarea>
-                    <textarea placeholder="Certificate No.:" label="Category"></textarea>
-                    <textarea placeholder="Training Duration" label="Category"></textarea>    
-                    <textarea placeholder="Skill Acquired" label="Category"></textarea> 
-                    <textarea placeholder="Conducted By:" label="Category"></textarea> 
+                    <textarea placeholder="Batch Name:" label="Category"></textarea>
+                    <textarea placeholder="Date:" label="Category"></textarea>
+                    
              </div>
             </Modal.Body>
             <Modal.Footer>

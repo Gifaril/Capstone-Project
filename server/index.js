@@ -132,7 +132,7 @@ const server = async ()=> {
         const query = {
             text: `
             SELECT * FROM students
-            WHERE id = $1
+            WHERE student_id = $1
             `,
             values: [req.id]
           }
@@ -140,14 +140,14 @@ const server = async ()=> {
             const response = await db.query(query)
             res.status(200).json({
                 status: 'success',
-                data: response.rows
+                data: response.rows[0]
             })  
         } catch (error) {
             console.error(error)
         }
     })
 
-    app.post('/api/students', authenticateToken, async (req, res)=> {
+    app.post('/api/students', async (req, res)=> {
         const body = req.body
         if (!validator.validate(body.email)){
             res.status(500).send('Email is not valid')
@@ -156,9 +156,56 @@ const server = async ()=> {
         const hashPassword = await argon2.hash(body.password)
         const query = {
             text: `
-            INSERT INTO students(first_name, last_name, password, email, age, birthdate, batch_id, created_on) VALUES($1, $2, $3, $4, $5, $6, $7, $8)
+            INSERT INTO students(first_name, last_name, password, email, age, birthdate, created_on) VALUES($1, $2, $3, $4, $5, $6, $7)
             `,
-            values: [body.first_name, body.last_name, hashPassword, body.email, body.age, body.birthdate, body.batch_id, new Date()],
+            values: [body.first_name, body.last_name, hashPassword, body.email, body.age, body.birthdate, new Date()],
+          }
+        try {
+            await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: body
+            })    
+        } catch (error) {
+            console.error(error)
+            res.status(500).send('Something went wrong!')
+        }
+    })
+
+    app.put('/api/student/:studend_id', authenticateToken, async (req, res)=> {
+        const body = req.body
+        if (!validator.validate(body.email)){
+            res.status(500).send('Email is not valid')
+            return
+        }
+        const query = {
+            text: `
+            INSERT INTO students(first_name, last_name, password, email, age, birthdate, batch_id, created_on) VALUES($1, $2, $3, $4, $5, $6)
+            `,
+            values: [body.first_name, body.last_name, body.email, body.age, body.birthdate, body.batch_id],
+          }
+        try {
+            await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: body
+            })    
+        } catch (error) {
+            console.error(error)
+            res.status(500).send('Something went wrong!')
+        }
+    })
+
+    app.put('/api/student/:student_id/add_batch', authenticateToken, async (req, res)=> {
+        const body = req.body
+        const studend_id = req.params.student_id
+        const query = {
+            text: `
+            UPDATE students
+            SET batch_id = $2
+            WHERE student_id=$1
+            `,
+            values: [studend_id, body.batch_id],
           }
         try {
             await db.query(query)
@@ -210,6 +257,51 @@ const server = async ()=> {
         }
     })
 
+    app.put('/api/announcement/:announcement_id', authenticateToken, async (req, res)=> {
+        const body = req.body
+        const announcementId = req.params.announcement_id
+        const query = {
+            text: `
+            UPDATE announcements
+            SET title = $1
+            WHERE announcement_id=$2
+            `,
+            values: [body.title, announcementId],
+          }
+        try {
+            await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: body
+            })    
+        } catch (error) {
+            console.error(error)
+            res.status(500).send('Something went wrong!')
+        }
+    })
+
+    app.delete('/api/announcement/:announcement_id', authenticateToken, async (req, res)=> {
+        const body = req.body
+        const announcementId = req.params.announcement_id
+        const query = {
+            text: `
+            DELETE FROM announcements
+            WHERE announcement_id=$1
+            `,
+            values: [ announcementId],
+          }
+        try {
+            await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: body
+            })    
+        } catch (error) {
+            console.error(error)
+            res.status(500).send('Something went wrong!')
+        }
+    })
+
     app.post('/api/file', authenticateToken, async (req, res)=> {
         const body = req.body
         const query = {
@@ -247,6 +339,28 @@ const server = async ()=> {
             console.error(error)
         }
     })
+
+    app.delete('/api/file/:file_id', authenticateToken, async (req, res)=> {
+        console.log(req)
+        const query = {
+            text: `
+            DELETE FROM files
+            WHERE file_id=$1
+            `,
+            values: [ req.params.file_id],
+
+          }
+        try {
+            const response = await db.query(query)
+            res.status(200).json({
+                status: 'success',
+                data: response.rows
+            })  
+        } catch (error) {
+            console.error(error)
+        }
+    })
+
 
     
       app.get('/api/file/:file_id/download', authenticateToken, async (req, res)=> {

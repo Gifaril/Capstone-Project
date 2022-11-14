@@ -1,5 +1,6 @@
 const db = require('../../db')
 const argon2 = require('argon2');
+var validator = require("email-validator");
 
 module.exports = async (req, res)=> {
     const body = req.body

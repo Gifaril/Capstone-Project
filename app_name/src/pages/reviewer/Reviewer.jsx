@@ -8,10 +8,12 @@ import axios from 'axios'
 
 const Reviewer = () => {
     const [files, setFiles] = useState([])
-            
+    const [user, setUser] = useState('')
+    
     const fetchData = async () => {
         const token = window.localStorage.getItem('token')
-
+        const userType = window.localStorage.getItem('userType')
+        setUser(userType)
     const config = {
         headers: { Authorization: `Bearer ${token}` }
     };
@@ -38,9 +40,12 @@ const Reviewer = () => {
             <Sidebar/>
             <div className="RevContainer">
                 <div className="Rev">
-                    <FileUpload files={files} setFiles={setFiles}
-                    removeFile={removeFile} />
-                    <FileList files={files} removeFile={removeFile} />
+                    {user === 'admin'?
+                        <FileUpload files={files} setFiles={setFiles}
+                        removeFile={removeFile} /> : null
+                    }
+
+                    <FileList user={user} fetchData={fetchData} files={files} removeFile={removeFile} />
                 </div>
             </div>
         </div>

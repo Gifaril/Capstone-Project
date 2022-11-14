@@ -7,7 +7,7 @@ import "./login.css";
 function Login() {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
-  const [userType, setUserType] = useState('admin')
+  const [userType, setUserType] = useState('student')
   const navigate = useNavigate()
 
 

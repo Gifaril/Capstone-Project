@@ -1,30 +1,56 @@
 import { useState } from "react";
 import "./signup.scss";
 import FormInput from "../../components/form/FormInput";
+import axios from "axios";
+import { useNavigate  } from "react-router-dom";
 
 const Signup = () => {
   const [values, setValues] = useState({
-    username: "",
+    first_name: "",
     email: "",
-    birthday: "",
+    last_name: "",
     password: "",
     confirmPassword: "",
+    birthdate: "",
+    age: ""
   });
+  const navigate = useNavigate()
 
   const inputs = [
     {
       id: 1,
-      name: "username",
+      name: "first_name",
       type: "text",
-      placeholder: "Username",
-      errorMessage:
-        "Username should be 3-16 characters and shouldn't include any special character!",
-      label: "Username",
-      pattern: "^[A-Za-z0-9]{3,16}$",
+      placeholder: "First Name",
+      label: "First Name",
       required: true,
     },
     {
       id: 2,
+      name: "last_name",
+      type: "text",
+      placeholder: "Last Name",
+      label: "Last Name",
+      required: true,
+    },
+    {
+      id: 3,
+      name: "age",
+      type: "text",
+      placeholder: "Age",
+      label: "Age",
+      required: true,
+    },
+    {
+      id: 4,
+      name: "birthdate",
+      type: "date",
+      placeholder: "Birth date",
+      label: "Birth date",
+      required: true,
+    },
+    {
+      id: 5,
       name: "email",
       type: "email",
       placeholder: "Email",
@@ -33,14 +59,7 @@ const Signup = () => {
       required: true,
     },
     {
-      id: 3,
-      name: "birthday",
-      type: "date",
-      placeholder: "Birthday",
-      label: "Birthday",
-    },
-    {
-      id: 4,
+      id: 6,
       name: "password",
       type: "password",
       placeholder: "Password",
@@ -51,7 +70,7 @@ const Signup = () => {
       required: true,
     },
     {
-      id: 5,
+      id: 7,
       name: "confirmPassword",
       type: "password",
       placeholder: "Confirm Password",
@@ -62,8 +81,26 @@ const Signup = () => {
     },
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+        // Find user login info
+        console.log(values)
+        try {
+          const response = await axios.post('http://localhost:8080/api/students', {
+          password: values.password,
+          email: values.email,
+          first_name: values.first_name,
+          last_name: values.last_name,
+          age: parseInt(values.age),
+          birthdate: values.birthdate,
+          }); 
+
+          console.log(response)
+
+          navigate(`/login`)
+      } catch (error) {
+        console.error(error)
+      }
   };
 
   const onChange = (e) => {

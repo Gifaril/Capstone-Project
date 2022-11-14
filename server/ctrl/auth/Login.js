@@ -16,7 +16,7 @@ module.exports = async (req, res)=> {
     try {
         const response = await db.query(query)
         const data = response.rows[0]
-
+        console.log(data)
         if (!data){
           return  res.status(500).send('Invalid credentials!')
         }
@@ -26,7 +26,7 @@ module.exports = async (req, res)=> {
         res.status(200).json({
             status: 'success',
             data,
-            token: generateAccessToken({id:data.id})
+            token: generateAccessToken({id: body.type === 'admin' ? data.id : data.student_id})
         })  
     } catch (error) {
         console.error(error)
