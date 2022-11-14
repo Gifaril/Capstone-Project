@@ -4,6 +4,7 @@ import Signup from "./pages/signup/Signup";
 import Educ from "./pages/education/Educ";
 import Reviewer from "./pages/reviewer/Reviewer";
 import Trainings from "./pages/trainings/Trainings";
+import Profile from "./pages/profile/Profile";
 
 
 import {
@@ -27,8 +28,9 @@ function App() {
       <Routes>
       <Route path="signup" element={<Signup/>} />
         <Route path="login" element={<Login/>} />
-        <Route element={<ProptectedRoute/>}  path="/">
+        <Route path="/">
           <Route index element={<Home/>} />
+          <Route path="profile" element={<Profile/>}/>
           <Route path="reviewer" element={<Reviewer/>}/>
           <Route path="batch" element={<Educ/>}/>
           <Route path="trainings" element={<Trainings/>}/>

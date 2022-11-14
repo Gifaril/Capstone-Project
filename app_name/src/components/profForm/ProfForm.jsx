@@ -11,7 +11,7 @@ const ProfForm = (props) => {
       <input className='inputProfile'
         style={{marginTop: 0}}
         {...inputProps}
-        onChange={onChange}
+        onChange={onChange} 
       />
     </div>
   );

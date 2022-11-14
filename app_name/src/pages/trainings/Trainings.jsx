@@ -4,6 +4,7 @@ import TrainingsModal from "../../components/trainingsMod/TrainingsModal";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 const Trainings = () => {
     const [values, setValues] = useState([]);
