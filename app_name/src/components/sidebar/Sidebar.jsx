@@ -4,7 +4,6 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import DocumentScannerOutlinedIcon from '@mui/icons-material/DocumentScannerOutlined';
 import ModelTrainingIcon from '@mui/icons-material/ModelTraining';
 import LogoutIcon from '@mui/icons-material/Logout';
-import PersonIcon from '@mui/icons-material/Person';
 import { useNavigate  } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Pic from "../../components/pic/avatar2-removebg-preview.png";
@@ -72,10 +71,12 @@ const Sidebar = () => {
                             <Link to="/batch"><span>Students</span></Link>
                         </li>   : null 
                     }
+                    {user === 'admin' ?
                     <li>
                         <ModelTrainingIcon className="icon"/>
                         <Link to="/trainings"><span>Batch</span></Link>
-                    </li>
+                    </li> : null
+                    }
                     <li>
                         <DocumentScannerOutlinedIcon className="icon"/>
                         <Link to="/reviewer"><span>Reviewer</span></Link>
