@@ -28,7 +28,7 @@ function App() {
       <Routes>
       <Route path="signup" element={<Signup/>} />
         <Route path="login" element={<Login/>} />
-        <Route path="/">
+        <Route path="/" element={<ProptectedRoute/>}>
           <Route index element={<Home/>} />
           <Route path="profile" element={<Profile/>}/>
           <Route path="reviewer" element={<Reviewer/>}/>
